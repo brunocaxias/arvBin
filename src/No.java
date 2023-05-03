@@ -95,10 +95,6 @@ public class No<T> {
         }
     }
 
-    public int fatorBalanceamento() {
-        int alturaEsquerda = esquerda != null ? esquerda.obterAltura() : -1;
-        int alturaDireita = direita != null ? direita.obterAltura() : -1;
-        return alturaEsquerda - alturaDireita;
-    }
+   
 
 }

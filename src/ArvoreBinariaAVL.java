@@ -14,24 +14,47 @@ public class ArvoreBinariaAVL<T> extends ArvoreBinaria<T> {
 
     @Override
     protected No<T> inserir(T valor, No<T> no) {
-        no = super.inserir(valor, no);
+
+
+        if (comparator.compare(valor, no.getValor()) < 0) {
+            if (no.getEsquerda() == null) {
+                no.setEsquerda(new No<T>(valor)); 
+                quantElementos++;
+            } else {
+                no.setEsquerda(inserir(valor, no.getEsquerda()));
+            }
+        } else {
+            if (no.getDireita() == null) {
+                no.setDireita(new No<T>(valor)); 
+                quantElementos++;
+            } else {
+                no.setDireita(inserir(valor, no.getDireita()));
+            }
+        }
 
         //Peso a direita
-        if(no.getDireita() != null && no.fatorBalanceamento() > 1){
-            if(no.getDireita().fatorBalanceamento() > 0){
+        if(fatorBalanceamento(no) > 1){
+            if(fatorBalanceamento(no.getDireita()) > 0){
                 no = this.rotacaoEsquerda(no);
             }else{
                 no = this.rotacaoDireitaEsquerda(no);
             }
         //Peso a esquerda
-        }else if(no.getEsquerda() != null &&no.fatorBalanceamento() < -1){
-            if(no.getEsquerda().fatorBalanceamento() < 0){
+        }else if(fatorBalanceamento(no) < -1){
+            if(fatorBalanceamento(no.getEsquerda()) < 0){
                 no = this.rotacaoDireita(no);
             }else{
                 no = this.rotacaoEsquerdaDireita(no);
             }
         }
         return no;
+    }
+
+    public int fatorBalanceamento(No<T> no) {
+       if(no == null){
+        return 0;
+       }
+       return no.getEsquerda().obterAltura() - no.getDireita().obterAltura();
     }
 
     ///////////////////////////////////////////////////
