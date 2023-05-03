@@ -16,13 +16,15 @@ public class ArvoreBinariaAVL<T> extends ArvoreBinaria<T> {
     protected No<T> inserir(T valor, No<T> no) {
         no = super.inserir(valor, no);
         
-        if(no.fatorBalanceamento() > 1){
+        //Peso a direita
+        if(no.getDireita() != null && no.fatorBalanceamento() > 1){
             if(no.getDireita().fatorBalanceamento() > 0){
                 no = this.rotacaoEsquerda(no);
             }else{
                 no = this.rotacaoDireitaEsquerda(no);
             }
-        }else if(no.fatorBalanceamento() < -1){
+        //Peso a esquerda
+        }else if(no.getEsquerda() != null &&no.fatorBalanceamento() < -1){
             if(no.getEsquerda().fatorBalanceamento() < 0){
                 no = this.rotacaoDireita(no);
             }else{
@@ -42,6 +44,8 @@ public class ArvoreBinariaAVL<T> extends ArvoreBinaria<T> {
 
         No<T> f = r.getDireita();
 
+        if (f == null) return r;
+
         r.setDireita(f.getEsquerda());
         f.setEsquerda(r);
         // Retorno do no filho que passou a ser raiz (r = raiz / f = filho)
@@ -51,6 +55,9 @@ public class ArvoreBinariaAVL<T> extends ArvoreBinaria<T> {
     private No<T> rotacaoDireita(No<T> r) {
 
         No<T> f = r.getEsquerda();
+
+        if (f == null) return r;
+        
         r.setEsquerda(f.getDireita());
         f.setDireita(r);
 
