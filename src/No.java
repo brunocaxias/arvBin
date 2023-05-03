@@ -13,7 +13,6 @@ public class No<T> {
         this.valor = valor;
         this.esquerda = esquerda;
         this.direita = direita;
-        int altura = 1;
     }
 
     /**
