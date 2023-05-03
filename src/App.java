@@ -16,7 +16,7 @@ public class App {
         ArvoreBinariaAVL arvoreAVLMatricula = new ArvoreBinariaAVL<>(new ComparadorAlunoPorMatricula());
 
         long tempoInicial = System.currentTimeMillis();
-        List<Aluno> alunos = Menu.lerArquivo("entradaOrdenada30.txt");
+        List<Aluno> alunos = Menu.lerArquivo("entradaOrdenada10.txt");
 
         for (Aluno aluno : alunos) {
             arvoreBinariaNome.inserir(aluno);

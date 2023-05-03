@@ -2,7 +2,6 @@ public class No<T> {
 
     private T valor;
     private No<T> esquerda, direita;
-    private int altura;
 
     /**
      * 
@@ -14,9 +13,7 @@ public class No<T> {
         this.valor = valor;
         this.esquerda = esquerda;
         this.direita = direita;
-        this.altura = 0;
     }
-
 
     /**
      * 
@@ -57,7 +54,7 @@ public class No<T> {
     public void setEsquerda(No<T> esquerda) {
         this.esquerda = esquerda;
     }
-    
+
     /**
      * 
      * @return filho a direita
@@ -73,38 +70,34 @@ public class No<T> {
     public void setDireita(No<T> direita) {
         this.direita = direita;
     }
-    
 
     ///////////////////////////////////////////////////////////////
-    ///                                                         /// 
-    ///     Metodos para calculo de fator de balanceamento      ///
-    ///                                                         ///
+    /// ///
+    /// Metodos para calculo de fator de balanceamento ///
+    /// ///
     ///////////////////////////////////////////////////////////////
 
-
-   
-
-    public int obterAltura(){
+    public int obterAltura() {
         return obterAltura(this);
     }
 
-    private int obterAltura(No<T> r){
-        if(r == null){
+    private int obterAltura(No<T> r) {
+        if (r == null) {
             return -1;
-        }else
-           return  r.altura;
+        } else {
+            int hd = obterAltura(r.getDireita());
+            int he = obterAltura(r.getEsquerda());
+            if (hd > he) {
+                return hd + 1;
+            } else {
+                return he + 1;
+            }
         }
-
-     public void atualizaAltura() {
-        int alturaEsquerda = (esquerda != null) ? esquerda.altura : -1;
-        int alturaDireita = (direita != null) ? direita.altura : -1;
-        this.altura = 1 + Math.max(alturaEsquerda, alturaDireita);
     }
 
-    public int fatorBalanceamento(){
-        
+    public int fatorBalanceamento() {
+
         return obterAltura(this.direita) - obterAltura(this.esquerda);
     }
 
-    
 }

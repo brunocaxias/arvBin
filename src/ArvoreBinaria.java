@@ -52,6 +52,7 @@ public class ArvoreBinaria<T> {
     }
 
     protected No<T> inserir(T valor, No<T> no) {
+        
         if (comparator.compare(valor, no.getValor()) < 0) {
             if (no.getEsquerda() == null) {
                 no.setEsquerda(new No<T>(valor)); 
@@ -68,7 +69,6 @@ public class ArvoreBinaria<T> {
             }
         }
 
-        no.atualizaAltura();
         return no;
     }
 
@@ -287,7 +287,7 @@ public class ArvoreBinaria<T> {
 
         return atual;
     }
-    
+
     public  void escreverArvoreEmOrdem (String caminhoArquivo) {
         try (PrintWriter writer = new PrintWriter(new File(caminhoArquivo))) {
             escreverSubarvoreEmOrdem(this.getRaiz(), writer);

@@ -14,52 +14,28 @@ public class ArvoreBinariaAVL<T> extends ArvoreBinaria<T> {
 
     @Override
     protected No<T> inserir(T valor, No<T> no) {
-        if (comparator.compare(valor, no.getValor()) < 0) {
-            if (no.getEsquerda() == null) {
-                no.setEsquerda(new No<T>(valor)); 
-                quantElementos++;
-            } else {
-                no.setEsquerda(inserir(valor, no.getEsquerda()));
+        no = super.inserir(valor, no);
+
+        if(raiz.fatorBalanceamento() > 1){
+            if(raiz.getDireita().fatorBalanceamento() > 0){
+                raiz = this.rotacaoEsquerda(raiz);
+            }else{
+                raiz = this.rotacaoDireitaEsquerda(raiz);
             }
-        } else {
-            if (no.getDireita() == null) {
-                no.setDireita(new No<T>(valor)); 
-                quantElementos++;
-            } else {
-                no.setDireita(inserir(valor, no.getDireita()));
+        }else if(raiz.fatorBalanceamento() < -1){
+            if(raiz.getEsquerda().fatorBalanceamento() < 0){
+                raiz = this.rotacaoDireita(raiz);
+            }else{
+                raiz = this.rotacaoEsquerdaDireita(raiz);
             }
         }
-        return balancearArvore(no);
+        return raiz;
     }
-
-    private No<T> balancearArvore(No<T> no) {
-        no.atualizaAltura();
-
-        // Direita pesada
-        if (no.fatorBalanceamento() > 1) {
-            if (no.getDireita().fatorBalanceamento() > 0) {
-                no = this.rotacaoEsquerda(no);
-            } else {
-                no = this.rotacaoDireitaEsquerda(no);
-            }
-        }
-        // Esquerda pesada
-        else if(no.fatorBalanceamento() < -1){
-            if(no.getEsquerda().fatorBalanceamento() < 0){
-                no = this.rotacaoDireita(no);
-            }
-            else{
-                no = this.rotacaoEsquerdaDireita(no);
-            }
-        }
-        return no;
-    }
-
 
     ///////////////////////////////////////////////////
-    ///                                             ///
-    ///             Metodos de rotacao              ///
-    //                                              ///
+    /// ///
+    /// Metodos de rotacao ///
+    // ///
     ///////////////////////////////////////////////////
 
     private No<T> rotacaoEsquerda(No<T> r) {
@@ -68,9 +44,6 @@ public class ArvoreBinariaAVL<T> extends ArvoreBinaria<T> {
 
         r.setDireita(f.getEsquerda());
         f.setEsquerda(r);
-
-        r.atualizaAltura();
-        f.atualizaAltura();
         // Retorno do no filho que passou a ser raiz (r = raiz / f = filho)
         return f;
     }
@@ -81,8 +54,6 @@ public class ArvoreBinariaAVL<T> extends ArvoreBinaria<T> {
         r.setEsquerda(f.getDireita());
         f.setDireita(r);
 
-        r.atualizaAltura();
-        f.atualizaAltura();
         // Retorno do no filho que passou a ser raiz (r = raiz / f = filho)
         return f;
     }
