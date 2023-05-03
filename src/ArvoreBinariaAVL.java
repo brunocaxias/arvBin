@@ -15,21 +15,21 @@ public class ArvoreBinariaAVL<T> extends ArvoreBinaria<T> {
     @Override
     protected No<T> inserir(T valor, No<T> no) {
         no = super.inserir(valor, no);
-
-        if(raiz.fatorBalanceamento() > 1){
-            if(raiz.getDireita().fatorBalanceamento() > 0){
-                raiz = this.rotacaoEsquerda(raiz);
+        
+        if(no.fatorBalanceamento() > 1){
+            if(no.getDireita().fatorBalanceamento() > 0){
+                no = this.rotacaoEsquerda(no);
             }else{
-                raiz = this.rotacaoDireitaEsquerda(raiz);
+                no = this.rotacaoDireitaEsquerda(no);
             }
-        }else if(raiz.fatorBalanceamento() < -1){
-            if(raiz.getEsquerda().fatorBalanceamento() < 0){
-                raiz = this.rotacaoDireita(raiz);
+        }else if(no.fatorBalanceamento() < -1){
+            if(no.getEsquerda().fatorBalanceamento() < 0){
+                no = this.rotacaoDireita(no);
             }else{
-                raiz = this.rotacaoEsquerdaDireita(raiz);
+                no = this.rotacaoEsquerdaDireita(no);
             }
         }
-        return raiz;
+        return no;
     }
 
     ///////////////////////////////////////////////////
