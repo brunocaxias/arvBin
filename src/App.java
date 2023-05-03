@@ -12,8 +12,8 @@ public class App {
 
         ArvoreBinaria arvoreBinariaNome = new ArvoreBinaria<Aluno>(new ComparadorAlunoPorNome());
         ArvoreBinaria arvoreBinariaMatricula = new ArvoreBinaria<Aluno>(new ComparadorAlunoPorMatricula());
-        ArvoreBinariaAVL arvoreAVLNome = new ArvoreBinariaAVL<>(new ComparadorAlunoPorNome());
-        ArvoreBinariaAVL arvoreAVLMatricula = new ArvoreBinariaAVL<>(new ComparadorAlunoPorMatricula());
+        ArvoreBinariaAVL arvoreAVLNome = new ArvoreBinariaAVL<Aluno>(new ComparadorAlunoPorNome());
+        ArvoreBinariaAVL arvoreAVLMatricula = new ArvoreBinariaAVL<Aluno>(new ComparadorAlunoPorMatricula());
 
         long tempoInicial = System.currentTimeMillis();
         List<Aluno> alunos = Menu.lerArquivo("entradaOrdenada10.txt");
@@ -191,7 +191,7 @@ public class App {
                     arvoreBinariaMatricula.print();
 
                     System.out.println("\nPrint da Arvore AVL de Matricula");
-                    arvoreAVLNome.print();
+                    arvoreAVLMatricula.print();
 
                     System.out.println("\nPrint da Arvore de Nomes");
                     arvoreBinariaNome.print();

@@ -13,6 +13,7 @@ public class No<T> {
         this.valor = valor;
         this.esquerda = esquerda;
         this.direita = direita;
+
     }
 
     /**
@@ -77,26 +78,27 @@ public class No<T> {
     /// ///
     ///////////////////////////////////////////////////////////////
 
-    public int obterAltura(){
-        return obterAltura(this);       
+    public int obterAltura() {
+        return obterAltura(this);
     }
-    
-    private int obterAltura(No<T> r){
-        if(r==null)
+
+    private int obterAltura(No<T> r) {
+        if (r == null)
             return -1;
-        else{
+        else {
             int hd = obterAltura(r.getDireita());
             int he = obterAltura(r.getEsquerda());
             if (hd > he)
-                return hd+1;
+                return hd + 1;
             else
-                return he+1;
+                return he + 1;
         }
     }
-    
-    
-    public int fatorBalanceamento(){
-        return obterAltura(this.direita) - obterAltura(this.esquerda);
+
+    public int fatorBalanceamento() {
+        int alturaEsquerda = esquerda != null ? esquerda.obterAltura() : -1;
+        int alturaDireita = direita != null ? direita.obterAltura() : -1;
+        return alturaEsquerda - alturaDireita;
     }
 
 }

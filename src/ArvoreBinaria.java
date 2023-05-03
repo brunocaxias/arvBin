@@ -169,7 +169,7 @@ public class ArvoreBinaria<T> {
      * @return altura da arvore
      */
     public int getAltura() {
-        return this.raiz.obterAltura();
+        return raiz.obterAltura();
     }
 
     /**
