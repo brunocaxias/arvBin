@@ -52,7 +52,7 @@ public class ArvoreBinaria<T> {
     }
 
     protected No<T> inserir(T valor, No<T> no) {
-        
+
         if (comparator.compare(valor, no.getValor()) < 0) {
             if (no.getEsquerda() == null) {
                 no.setEsquerda(new No<T>(valor)); 
@@ -68,7 +68,6 @@ public class ArvoreBinaria<T> {
                 no.setDireita(inserir(valor, no.getDireita()));
             }
         }
-
         return no;
     }
 
