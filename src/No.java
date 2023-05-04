@@ -95,6 +95,7 @@ public class No<T> {
         }
     }
 
-   
-
+    public int fatorBalanceamento() {
+        return obterAltura(this.direita) - obterAltura(this.esquerda);
+    }
 }
